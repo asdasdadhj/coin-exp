@@ -3,20 +3,20 @@
 echo "🚀 Setting up Cryptocurrency Price Tracker"
 echo "=========================================="
 
-# Setup Backend (Python Flask)
+# Setup Backend (Python Flask with uv)
 echo ""
-echo "📦 Setting up Backend (Python Flask)..."
+echo "📦 Setting up Backend (Python Flask with uv)..."
 cd backend
 
-if [ ! -d "venv" ]; then
-    echo "Creating Python virtual environment..."
-    python3 -m venv venv
+# Check if uv is installed
+if ! command -v uv &> /dev/null; then
+    echo "Installing uv..."
+    curl -LsSf https://astral.sh/uv/install.sh | sh
+    source $HOME/.cargo/env
 fi
 
-echo "Installing Python dependencies..."
-source venv/bin/activate
-pip install -r requirements.txt
-deactivate
+echo "Installing Python dependencies with uv..."
+uv sync
 
 echo "✅ Backend setup complete!"
 
@@ -36,12 +36,12 @@ echo "✅ Frontend setup complete!"
 cd ..
 
 echo ""
-echo "🎉 Setup Complete!"
+echo "Setup Complete!"
 echo "=================="
 echo ""
-echo "Backend (Python Flask):"
-echo "  Command-line: cd backend && source venv/bin/activate && python crypto_tracker.py"
-echo "  Web server:   cd backend && source venv/bin/activate && python crypto_tracker.py --web"
+echo "Backend (Python Flask with uv):"
+echo "  Command-line: cd backend && uv run python crypto_tracker.py"
+echo "  Web server:   cd backend && uv run python crypto_tracker.py --web"
 echo "  URL:          http://localhost:8080"
 echo ""
 echo "Frontend (Next.js):"

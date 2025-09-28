@@ -1,21 +1,30 @@
 #!/bin/bash
 
-echo "🚀 Setting up Cryptocurrency Price Tracker..."
+echo "🚀 Setting up Cryptocurrency Price Tracker with uv..."
 
-# Create virtual environment if it doesn't exist
-if [ ! -d "venv" ]; then
-    echo "📦 Creating virtual environment..."
-    python3 -m venv venv
+# Check if uv is installed
+if ! command -v uv &> /dev/null; then
+    echo "❌ uv is not installed. Installing uv..."
+    curl -LsSf https://astral.sh/uv/install.sh | sh
+    source $HOME/.cargo/env
 fi
 
-# Activate virtual environment and install dependencies
-echo "📥 Installing dependencies..."
-source venv/bin/activate
-pip install -r requirements.txt
+# Sync dependencies with uv
+echo "📥 Installing dependencies with uv..."
+uv sync
 
 echo "✅ Setup complete!"
 echo ""
 echo "Usage:"
-echo "  source venv/bin/activate && python crypto_tracker.py           # Command-line interface"
-echo "  source venv/bin/activate && python crypto_tracker.py --web     # Web interface"
-echo "  source venv/bin/activate && python crypto_tracker.py --help    # Show help"
+echo "  uv run python crypto_tracker.py           # Command-line interface"
+echo "  uv run python crypto_tracker.py --web     # Web interface"
+echo "  uv run python crypto_tracker.py --help    # Show help"
+echo ""
+echo "Development commands:"
+echo "  uv add <package>                          # Add new dependency"
+echo "  uv add --dev <package>                    # Add dev dependency"
+echo "  uv lock                                   # Update lock file"
+echo "  uv sync                                   # Sync dependencies"
+echo "  uv run black .                            # Format code"
+echo "  uv run ruff check .                       # Lint code"
+echo "  uv run pytest                             # Run tests"

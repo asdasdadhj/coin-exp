@@ -21,13 +21,14 @@ coin-exp/
 
 ## Features
 
-### Backend (Python Flask)
+### Backend (Python Flask with uv)
 - **Command-line interface** with beautiful terminal output
 - **Web interface** with Bootstrap styling
 - **JSON API** endpoint for price data
 - **Real-time data** from Binance public API
 - **Auto-refresh** functionality
 - **Error handling** and retry logic
+- **Modern Python packaging** with uv and pyproject.toml
 
 ### Frontend (Next.js)
 - **Server-side rendering** for fast initial load
@@ -83,7 +84,8 @@ Both implementations provide similar JSON API responses:
 ## Technology Stack
 
 ### Backend
-- **Python 3.7+**
+- **Python 3.9+**
+- **uv** for fast package management
 - **Flask** web framework
 - **Requests** for API calls
 - **Bootstrap 5** for styling
@@ -120,9 +122,7 @@ Both implementations provide similar JSON API responses:
 **Backend:**
 ```bash
 cd backend
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
+uv sync
 ```
 
 **Frontend:**
