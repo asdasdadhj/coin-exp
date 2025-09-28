@@ -342,25 +342,17 @@ uv sync --frozen --no-dev # Install production deps only
 Run all CI checks locally before committing:
 
 ```bash
-# Option 1: uv-only CI (no virtual environment needed)
-./ci-uv.sh                # Standalone script
-make ci-uv                # Via Makefile
+# Recommended: Complete CI script
+./ci.sh                   # All checks with uv (no venv needed)
+make ci                   # Via Makefile
 
-# Option 2: Traditional CI (requires .venv)
-./ci-check.sh             # Comprehensive script
-make ci                   # Check only
-make ci-fix               # Check and auto-fix
+# Quick fixes
+make ci-fix               # Auto-fix issues
 
-# Option 3: Manual commands (no venv needed)
-uv tool run ruff check .              # Linting
-uv tool run ruff format --check .     # Format check
-uv run --no-project --with mypy --with flask --with types-requests mypy crypto_tracker.py  # Type checking
-
-# Option 4: Manual commands (with project)
-uv run ruff check .                   # Linting
-uv run ruff format --check .          # Format check
+# Manual commands
+uv tool run ruff check .              # Linting only
+uv tool run ruff format --check .     # Format check only
 uv run mypy .                         # Type checking
-uv run pytest                         # Tests (if available)
 ```
 
 ### CI Pipeline Commands
