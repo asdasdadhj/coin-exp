@@ -321,9 +321,68 @@ uv run python script.py   # Run Python script
 uv run pytest            # Run tests
 uv run black .            # Format code
 uv run ruff check .       # Lint code
+uv run mypy .             # Type checking
+
+# CI/CD - Run all checks locally
+./ci.sh                   # Complete CI script (no venv needed)
+make ci                   # Using Makefile
+make ci-fix               # CI with auto-fix
+
+# One-liner CI check
+uv tool run ruff check . && uv tool run ruff format --check .
 
 # Production
 uv sync --frozen --no-dev # Install production deps only
+```
+
+## 🔍 CI/CD Integration
+
+### Local CI Checks
+
+Run all CI checks locally before committing:
+
+```bash
+# Option 1: uv-only CI (no virtual environment needed)
+./ci-uv.sh                # Standalone script
+make ci-uv                # Via Makefile
+
+# Option 2: Traditional CI (requires .venv)
+./ci-check.sh             # Comprehensive script
+make ci                   # Check only
+make ci-fix               # Check and auto-fix
+
+# Option 3: Manual commands (no venv needed)
+uv tool run ruff check .              # Linting
+uv tool run ruff format --check .     # Format check
+uv run --no-project --with mypy --with flask --with types-requests mypy crypto_tracker.py  # Type checking
+
+# Option 4: Manual commands (with project)
+uv run ruff check .                   # Linting
+uv run ruff format --check .          # Format check
+uv run mypy .                         # Type checking
+uv run pytest                         # Tests (if available)
+```
+
+### CI Pipeline Commands
+
+For GitHub Actions, GitLab CI, or other CI systems:
+
+```yaml
+# Example CI pipeline
+- name: Install dependencies
+  run: uv sync
+
+- name: Lint with Ruff
+  run: uv run ruff check .
+
+- name: Check formatting
+  run: uv run ruff format --check .
+
+- name: Type check with MyPy
+  run: uv run mypy .
+
+- name: Run tests
+  run: uv run pytest -v
 ```
 
 This guide covers everything you need to know about using uv with our cryptocurrency tracker backend!
