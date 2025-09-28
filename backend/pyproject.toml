@@ -5,7 +5,7 @@ description = "Cryptocurrency price tracker backend with Flask"
 authors = [
     {name = "Crypto Tracker", email = "crypto@tracker.dev"}
 ]
-readme = "../README.md"
+# readme = "../README.md"  # Not available in Docker context
 license = {text = "MIT"}
 requires-python = ">=3.9"
 keywords = ["cryptocurrency", "bitcoin", "ethereum", "flask", "api"]
