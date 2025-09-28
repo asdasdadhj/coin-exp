@@ -56,8 +56,8 @@ source venv/bin/activate && python crypto_tracker.py --web
 
 ```bash
 cd frontend
-npm install
-npm run dev
+yarn install
+yarn dev
 ```
 
 ## Live Demos
@@ -128,7 +128,7 @@ pip install -r requirements.txt
 **Frontend:**
 ```bash
 cd frontend
-npm install
+yarn install
 ```
 
 ## Deployment
