@@ -38,7 +38,7 @@ RUN useradd --create-home --shell /bin/bash app && chown -R app:app /app
 USER app
 
 # Default command for development (can be overridden)
-CMD ["uv", "run", "python", "crypto_tracker.py", "--web"]
+CMD ["uv", "run", "python", "crypto_tracker.py", "--api"]
 
 # Production stage - minimal image without dev dependencies
 FROM python:3.11-slim AS production
@@ -85,4 +85,4 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
     CMD curl -f http://localhost:8080/prices || exit 1
 
 # Run the application with uv
-CMD ["uv", "run", "python", "crypto_tracker.py", "--web"]
+CMD ["uv", "run", "python", "crypto_tracker.py", "--api"]
